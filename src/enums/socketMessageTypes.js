@@ -3,6 +3,7 @@ export default Object.freeze({
   agentUnavailable: 'agentUnavailable',
   requestCall: 'requestCall',
   restoreCall: 'restoreCall',
+  updateGuestSocket: 'updateGuestSocket',
   error: 'error',
   check: 'check',
   ping: 'ping',

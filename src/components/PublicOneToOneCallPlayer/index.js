@@ -2,7 +2,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import { isFunction } from '../../utils';
 import PropTypes from 'prop-types';
 import socketMessageTypes from '../../enums/socketMessageTypes';
-import { setCall, getCall, removeCall } from '../../services/callMemorizer';
+import {
+  setCall,
+  getCall,
+  removeCall,
+  setGuestToken,
+  getGuestToken,
+} from '../../services/callMemorizer';
 import PeerConnection from '../../services/webRtc/PeerConnection';
 import CallTemplate from './CallTemplate';
 import socketService from '../../services/socket';
@@ -137,10 +143,23 @@ const PublicOneToOneCallPlayer = ({ callId, turnServerCredentials, apiUri }) => 
           },
         });
       } else {
-        socket.emit('scheduled-one-to-one-call', {
-          type: socketMessageTypes.requestAgent,
-          data: { callId },
-        });
+        const guestToken = getGuestToken();
+        if (guestToken) {
+          socket.emit('scheduled-one-to-one-call', {
+            type: socketMessageTypes.updateGuestSocket,
+            data: {
+              oldSocketId: guestToken.guestSocketId,
+              newSocketId: socket.id,
+              callId,
+            },
+          });
+        } else {
+          setGuestToken(socket.id);
+          socket.emit('scheduled-one-to-one-call', {
+            type: socketMessageTypes.requestAgent,
+            data: { callId },
+          });
+        }
       }
     }
     // eslint-disable-next-line
@@ -203,8 +222,8 @@ const PublicOneToOneCallPlayer = ({ callId, turnServerCredentials, apiUri }) => 
 
   useEffect(() => {
     return () => {
-      socket.off('scheduled-one-to-one-call');
       endCall(true);
+      socket.off('scheduled-one-to-one-call');
     };
   }, []);
 
