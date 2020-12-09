@@ -8,6 +8,7 @@ import {
   removeCall,
   setGuestToken,
   getGuestToken,
+  removeGuestToken
 } from '../../services/callMemorizer';
 import PeerConnection from '../../services/webRtc/PeerConnection';
 import CallTemplate from './CallTemplate';
@@ -120,6 +121,7 @@ const PublicOneToOneCallPlayer = ({ callId, turnServerCredentials, apiUri }) => 
     pc = {};
     setLocalSrc(null);
     setPeerSrc(null);
+    removeGuestToken();
     removeCall();
   };
 
