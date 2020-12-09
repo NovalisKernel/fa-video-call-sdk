@@ -1,33 +1,43 @@
 {
+  "extends": ["airbnb", "prettier", "prettier/react"],
+  "plugins": ["react", "prettier"],
   "parser": "babel-eslint",
-  "extends": [
-    "standard",
-    "standard-react",
-    "plugin:prettier/recommended",
-    "prettier/standard",
-    "prettier/react"
-  ],
-  "env": {
-    "node": true
+  "rules": {
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".js", "jsx"]
+      }
+    ],
+    "prettier/prettier": "error",
+    "max-len": ["warn", 200],
+    "no-alert": "error",
+    "import/no-extraneous-dependencies": 0,
+    "jsx-a11y/no-static-element-interactions": 0,
+    "jsx-a11y/click-events-have-key-events": 0,
+    "import/prefer-default-export": 0,
+    "react/jsx-props-no-spreading": 0,
+    "array-callback-return": 0,
+    "jsx-a11y/label-has-associated-control": 0,
+    "no-plusplus": 0,
+    "import/no-unresolved": 0,
+    "react/forbid-prop-types": 0,
+    "no-nested-ternary": 0,
+    "no-underscore-dangle": 0,
+    "no-unused-vars": 0,
+    "no-empty-function": 0,
+    "camelcase": 0,
+    "import/no-cycle": 0,
+    "import/extensions": 0
   },
-  "parserOptions": {
-    "ecmaVersion": 2020,
-    "ecmaFeatures": {
-      "legacyDecorators": true,
-      "jsx": true
-    }
+  "env": {
+    "browser": true
   },
   "settings": {
-    "react": {
-      "version": "16"
+    "import/resolver": {
+      "node": {
+        "paths": ["src"]
+      }
     }
-  },
-  "rules": {
-    "space-before-function-paren": 0,
-    "react/prop-types": 0,
-    "react/jsx-handler-names": 0,
-    "react/jsx-fragments": 0,
-    "react/no-unused-prop-types": 0,
-    "import/export": 0
   }
 }
