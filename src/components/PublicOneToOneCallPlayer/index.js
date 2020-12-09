@@ -132,7 +132,7 @@ const PublicOneToOneCallPlayer = ({ callId, turnServerCredentials, apiUri }) => 
 
   useEffect(() => {
     // guest logic to start or restore call
-    if (userIsGuest) {
+    if (userIsGuest && isSocketLoaded) {
       const activeCall = getCall();
       if (activeCall) {
         socket.emit('scheduled-one-to-one-call', {
@@ -163,11 +163,11 @@ const PublicOneToOneCallPlayer = ({ callId, turnServerCredentials, apiUri }) => 
       }
     }
     // eslint-disable-next-line
-  }, []);
+  }, [isSocketLoaded]);
 
   useEffect(() => {
     // guest socket subscriptions
-    if (userIsGuest) {
+    if (userIsGuest && isSocketLoaded) {
       socket.on(
         'scheduled-one-to-one-call',
         async ({ type, data, error: socketErrorMessage }) => {
@@ -218,7 +218,7 @@ const PublicOneToOneCallPlayer = ({ callId, turnServerCredentials, apiUri }) => 
       );
     }
     // eslint-disable-next-line
-  }, []);
+  }, [isSocketLoaded]);
 
   useEffect(() => {
     return () => {

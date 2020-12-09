@@ -14,10 +14,10 @@ const App = () => {
       <ExampleComponent
         isOpened={isOpened}
         setOpen={setOpen}
-        currentCallId="callId"
+        currentCallId="274874c2-d745-43a2-95c2-98c74151a545-34"
         url="ant-media-server-test.tk:5443"
         role="streamer"
-        callType="oneToMany"
+        callType="oneToOne"
         apiUri="http://localhost:3001"
         turnServerCredentials={{
           username: 'username',
